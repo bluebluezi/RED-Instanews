@@ -1,0 +1,26 @@
+.main{
+	height:100px;
+	width:100px;
+	background-color: $main-color;
+	margin: $base-margin*2;
+	@include tablet{
+		background-color:yellow;
+	}
+	@include desktop{
+	background-color:green;
+	}
+
+	p {
+		color:white;
+		font-family: $main-font;
+	}
+	&:hover{
+		background:blue;
+	}
+}
+
+.main2{
+	@extend %active;
+	width:200px;
+	height:200px;
+}
