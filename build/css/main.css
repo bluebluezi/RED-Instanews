@@ -53,35 +53,97 @@ body {
   background: green;
   color: red; }
 
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh; }
+
 .article-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 500px;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr repeat(auto-fit, minmax(0, 100vw)) 0.3fr;
   -webkit-column-gap: 0px;
      -moz-column-gap: 0px;
           column-gap: 0px;
-  row-gap: 0px; }
+  row-gap: 0px;
+  overflow-y: hidden; }
+  @media (min-width: 600px) {
+    .article-grid {
+      grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 1000px) {
+    .article-grid {
+      grid-template-columns: repeat(4, 1fr); } }
+
+.nav-area {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  margin-top: 15vh; }
+  .nav-area img {
+    display: flex;
+    -o-object-fit: cover;
+       object-fit: cover;
+    width: 60%;
+    height: auto; }
+  .nav-area span {
+    display: flex;
+    margin-bottom: 5%;
+    opacity: 1; }
+  .nav-area select {
+    display: flex;
+    max-width: 33%; }
+
+a {
+  display: flex;
+  flex-direction: column;
+  height: 100vw;
+  width: 100%;
+  justify-content: center;
+  -o-object-fit: cover;
+     object-fit: cover; }
 
 figure {
   position: relative;
-  -o-object-fit: cover;
-     object-fit: cover; }
+  height: 100%;
+  width: 100%;
+  overflow-y: hidden; }
+  figure img {
+    height: 100%;
+    width: 100%;
+    -o-object-fit: cover;
+       object-fit: cover; }
   figure p {
     position: absolute;
     bottom: 0;
     color: white;
     background-color: rgba(0, 0, 0, 0.5);
-    max-height: 30%; }
+    max-height: 35%;
+    line-height: 1em;
+    overflow-y: hidden; }
+
+span {
+  color: white; }
+
+footer {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  margin-bottom: 15vh;
+  text-align: center; }
 
 .main {
   height: 100px;
   width: 100px;
   background-color: #3366ff;
   margin: 3em; }
-  @media (min-width: 320px) {
+  @media (min-width: 600px) {
     .main {
       background-color: yellow; } }
-  @media (min-width: 780px) {
+  @media (min-width: 1000px) {
     .main {
       background-color: green; } }
   .main p {

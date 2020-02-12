@@ -29,18 +29,30 @@ $(function () {
 			function ({ results }) {
 				console.log(results);
 				let image, caption, articleLink;
+				let height = 1500; //initialized height variable to keep track of shortest image
 				$.each(results, function (key, val) {
 					//loading gif
 					if (key > 11) {
+						// $("a").height(`${height}`);
+						// console.log("the computed height is" + height);
 						return false;
 					}
+
 					image = val.multimedia[0].url;
-					console.log();
+
+					// if (height > val.multimedia[0].height) {
+					// 	height = val.multimedia[0].height;
+					// 	console.log("NEWEST MIN HEIGHT IS" + height);
+					// }
+					console.log("all the heights" + val.multimedia[0].height);
+
 					articleLink = val.url;
 					caption = val.abstract;
-					$(".article-grid").append(`<a href="${articleLink}"><figure class="cell${key}"><img src="${image}" /img><p>${caption}</p></figure></a>`)
+					$(".article-grid").append(`<a href="${articleLink}" class="grid-links"><figure class="cell${key}"><img src="${image}" /img><p>${caption}</p></figure></a>`)
 
 				});
+
+				// (figure.height = height here)
 			});
 
 	});

@@ -23,6 +23,7 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 	overflow-x: hidden;
+
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -53,8 +54,8 @@ table {
 $main-color: #3366ff;
 $main-font: 'Open Sans';
 $base-margin: 1.5em;
-$desktop-width:780px;
-$tablet-width: 320px;
+$desktop-width:1000px;
+$tablet-width: 600px;
 
 body {
 	background: black;
@@ -83,21 +84,82 @@ body {
 	}
 }
 
+
+body{
+	display:flex;
+	flex-direction:column;
+	justify-content:space-between;
+	min-height:100vh;
+}
+
 .article-grid{
 	display:grid;
-	grid-template-columns:1fr 1fr 1fr;
-	grid-template-rows: 500px;
+	grid-template-columns:1fr;
+	@include tablet{
+		grid-template-columns: repeat(3,1fr);
+	}
+	@include desktop{
+		grid-template-columns: repeat(4,1fr);
+	}
+	grid-template-rows: 1fr repeat(auto-fit,minmax(0,100vw)) 0.3fr;
 	column-gap: 0px; 
 	row-gap: 0px;
+	overflow-y:hidden;
+}
+
+
+.nav-area{
+	display:flex;
+	flex-direction: column;
+	flex-wrap:nowrap;
+	align-items: center;
+	justify-content:center;
+	height:50vh;
+	margin-top:15vh;
+	
+	img{
+		display:flex;
+		object-fit:cover;
+		width:60%;
+		height:auto;
+
+
+	}
+
+	span{
+		display:flex;
+		margin-bottom:5%;
+		opacity:1;
+
+	}
+
+	select{
+		display:flex;
+		max-width:33%;
+	}
+	
+	
+}
+
+a{
+	display:flex;
+	flex-direction:column;
+	height:100vw;
+	width:100%;
+	justify-content: center;
+	object-fit:cover;
 }
 
 figure{
-	position:relative;
-	object-fit:cover;
-
+	position:relative;	
+		height:100%;
+		width:100%;
+		overflow-y:hidden; //important shit!!!!
 
 	img{
-	
+		height:100%;
+		width: 100%;
+		object-fit: cover;
 	}
 
 	p{
@@ -105,10 +167,29 @@ figure{
 		bottom:0;
 		color: white;
 		background-color:rgba(0,0,0,0.5);
-		max-height:30%;
+		max-height:35%;
+		line-height:1em;
+		overflow-y:hidden;
 	}
 }
 
+span{
+	color:white;
+}
+
+footer{
+	display:flex;
+	flex-direction: column;
+	color:white;
+	margin-bottom:15vh;
+	text-align:center;
+	// grid-row: -1/-2;
+}
+
+// main{
+// 	display:flex;
+// 	justify-content:center;
+// }
 
 
 
