@@ -1,26 +1,107 @@
-.main{
-	height:100px;
-	width:100px;
-	background-color: $main-color;
-	margin: $base-margin*2;
-	@include tablet{
-		background-color:yellow;
-	}
-	@include desktop{
-	background-color:green;
-	}
+$tablet-min-width : 768px;
+$desktop-min-width:992px; 
 
-	p {
-		color:white;
-		font-family: $main-font;
-	}
-	&:hover{
-		background:blue;
+$font-family-serif: 'Times New Roman', serif;
+$font-family-sansserif: 'Open Sans', 'Helvetica', 'Arial', sans-serif;
+$font-size-base: 16px;
+$text-color-primary: white;
+$text-color-secondary: #c2c2c2;
+
+$background-color: black;
+
+
+@mixin centered-contents {
+	display:flex;
+	flex-direction: column;
+	justify-content:center;
+	align-items:center;
+}
+
+@mixin full-width{
+	width:100%;
+}
+
+
+@mixin tablet{
+	@media(min-width: $tablet-min-width){
+		@content; // <--this line is required
 	}
 }
 
-.main2{
-	@extend %active;
-	width:200px;
-	height:200px;
+@mixin desktop{
+	@media(min-width: $desktop-min-width){
+		@content; // <--this line is required
+	}
+}
+
+
+
+body{
+	background-color: $background-color;
+	font-family: $font-family-sansserif;
+	font-size: $font-size-base;
+	@include full-width();
+}
+
+header{
+	@include full-width();
+	height:90vh;
+	color:$text-color-primary; 
+
+}
+
+.nav-area{
+	display:grid;
+	grid-template-columns: repeat(4, auto);
+	grid-template-rows: repeat(2, auto);
+	@include desktop(){
+		grid-template-columns: repeat(4, 1fr);
+	}
+	height:100%;
+	.logo{
+		@include centered-contents();
+		grid-column:1/5;
+		justify-content:flex-end;
+		img{
+			width:70%;
+		}
+		@include tablet(){
+			grid-column:1/3;
+			grid-row: 1/3;
+			justify-content: center;	
+			align-items:flex-end;
+		}
+		@include desktop(){
+			grid-column:1/2;
+		}
+	}
+	.dropdown{
+		@include centered-contents();
+		grid-column:1/5;
+		justify-content:flex-start;
+		& > :first-child{ 
+			// immediate (>)
+			// first child 
+			// of itself (&)
+			margin-top: 1.5rem;
+		}
+		@include tablet(){
+			grid-column:3/5;
+			grid-row: 1/3;
+			justify-content: center;
+			align-items:flex-start;
+		}
+		@include desktop(){
+			grid-column:2/3;
+		}
+	}
+}
+
+
+
+footer{
+	@include full-width();
+	@include centered-contents();
+	height:10vh;
+
 }

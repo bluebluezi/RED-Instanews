@@ -1,0 +1,321 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+	overflow-x: hidden;
+
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+//CUSTOM STYLES
+
+$main-color: #3366ff;
+$main-font: 'Open Sans';
+$base-margin: 1.5em;
+$desktop-min-width:992px; 
+$tablet-min-widths: 768px;
+
+body {
+	background: black;
+}
+
+//place holder
+%active{
+	background: green;
+	color: red;
+}
+
+@mixin primary-links{
+	color:blue;
+	text-decoration:underline;
+}
+
+@mixin tablet{
+	@media(min-width: $tablet-min-width){
+		@content; // <--this line is required
+	}
+}
+
+@mixin desktop{
+	@media(min-width: $desktop-min-width){
+		@content; // <--this line is required
+	}
+}
+
+html{
+	font-size:16px;
+}
+
+
+
+body{
+	display:flex;
+	flex-direction: column;
+	justify-content:space-between;
+	position:relative;
+	min-height:100vh; //ensures launch screen takes up full screen
+	font-size:16px;
+	overflow-y:scroll;
+	color: #ffffff;
+	main{
+		display:flex;
+		flex-direction:column;
+		position:relative;
+		justify-content:space-between;
+		align-items: center;
+
+		.nav-area{
+			position:relative;
+			top:20vh;
+			display:flex;
+			flex-direction: column;
+			flex-wrap:nowrap;
+			align-items: center;
+			justify-content:center;
+			min-width:50vw;
+			height:70vh;
+			@include tablet{
+				display:grid;
+				grid-template-columns: 55% 45%;
+				grid-auto-rows: 1fr 10%;
+			}
+			
+				
+			&:after{
+				content:" ";
+				// background-image://
+				min-height:15vh;
+				width:100%;
+				@include tablet{
+					min-height:0px;
+				}
+				//future:snap to top and fill the start screen (minus footer)
+				//style loading gif here
+			}
+			
+			img{
+				display:flex;
+				object-fit:cover;
+				width:100%;
+				height:auto;
+				margin-bottom:7%;
+				@include tablet{ 
+					height:50%;
+					width:auto;
+					margin-left:10%;
+					object-fit:cover;
+					margin-bottom:0%;	
+		}
+
+			}
+		
+			span{
+				display:flex;
+				margin-bottom:7%;
+				@include tablet{
+					height:1.5em;
+					font-size:1.5em;
+					margin-bottom:0;
+				}
+				
+
+			}
+		
+			select{
+				display:flex;
+				@include tablet{
+					width:57%;
+				}
+
+				option{
+					text-align:center;
+				}
+			}
+
+	
+			
+			
+		}
+
+		.article-grid{
+			display:grid;
+			grid-template-columns:1fr;
+			//position of article-grid in javascript
+			@include tablet{
+				grid-template-columns: repeat(3,1fr);
+				grid-template-rows: repeat(4,1fr);
+			}
+			@include desktop{
+				grid-template-columns: repeat(4,1fr);
+			}
+			grid-template-rows: 1fr repeat(auto-fit,minmax(0,100vw)) 0.3fr;
+			column-gap: 0px; 
+			row-gap: 0px;
+
+			&:after{
+				content: " ";
+				height:5vh;
+			}
+				a{
+					display:flex;
+					flex-direction:column;
+					height:100vw;
+					width:100%;
+					justify-content: center;
+					object-fit:cover;
+					overflow-y:hidden;
+
+						figure{
+							position:relative;	
+								height:100%;
+								width:100%;//important to prevent scrolling within each figure(we want scrolling only throughout the browser;
+								overflow-y:hidden;
+							img{
+								height:100%;
+								width: 100%;
+								object-fit: cover;
+								overflow-y:hidden;
+							}
+						
+							p{
+								display: flex;
+								align-items: center;
+								position: absolute;
+								bottom: 0;
+								background-color: rgba(0, 0, 0, 0.5);
+								min-height: 5em;
+								max-height: 6em;
+								line-height: 1em;
+								overflow-y: hidden;
+								color: white;
+							}
+						}
+				}
+		}
+			
+
+
+	}
+	
+	footer{
+		display:flex;
+		margin-bottom:5vh;
+		flex-direction: column;
+		width:100%;
+		align-items: center;
+		justify-content:center;
+		position:absolute;
+		bottom:0;
+
+		// display: flex;
+		// margin-bottom: 5vh;
+		// flex-direction: column;
+		// width: 100%;
+		// align-items: center;
+		// justify-content: center;
+		// position: absolute;
+		// bottom: 0;
+		// min-height: 10vh;
+
+		p{
+
+			color: #c2c2c2;
+			text-align:center;
+			
+		}
+		// grid-row: -1/-2;
+	}
+	
+
+}
+
+
+
+
+
+
+
+// main{
+// 	display:flex;
+// 	justify-content:center;
+// }
+
+
+
+
+
+
+// .main2{
+// 	@include primary-links;
+// 	width:200px;
+// 	height:200px;
+// }
+//NOTES FROM CLASS
+// .main{
+// 	height:100px;
+// 	width:100px;
+// 	background-color: $main-color;
+// 	margin: $base-margin*2;
+// 	@include tablet{
+// 		background-color:yellow;
+// 	}
+// 	@include desktop{
+// 	background-color:green;
+// 	}
+
+// 	p {
+// 		color:white;
+// 		font-family: $main-font;
+// 	}
+// 	&:hover{
+// 		background:blue;
+// 	}
+// }
+
+// .main2{
+// 	@extend %active;
+// 	width:200px;
+// 	height:200px;
+// }
