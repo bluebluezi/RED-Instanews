@@ -41,7 +41,7 @@ $(function () { //run after jQuery loaded
 
 
 	function calculateRowCount() {
-		if (vw < 768) {
+		if (vw < 768) { //typical breakpoints
 			return 1;
 		} else if (vw < 992) {
 			return 3
@@ -98,6 +98,7 @@ $(function () { //run after jQuery loaded
 	//add snap to first article feature..
 	$("#category-selector").change(function (e) {
 		$(".article-grid").empty();
+		$("header").addClass("shrink");
 		let selectedVal = $("#category-selector").find(':selected').text(); //
 		$.getJSON(`https://api.nytimes.com/svc/topstories/v2/${selectedVal}.json?api-key=${API_KEY}`,
 			function ({ results }) {
