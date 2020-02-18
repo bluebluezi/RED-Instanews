@@ -7,6 +7,7 @@ $(function () { //run after jQuery loaded
 	let vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 	let cachedResults = null;
 	const data = [    //select2 takes array as option data
+		{ id: 0, text: "badCateTest" },
 		{ id: 1, text: "arts" },
 		{ id: 2, text: "automobiles" },
 		{ id: 3, text: "books" },
@@ -52,7 +53,6 @@ $(function () { //run after jQuery loaded
 
 	function renderGrid() {
 		console.log('rerendering');
-		$(".article-grid").empty();
 		const rowCount = calculateRowCount();
 		$.each(cachedResults, function (key, val) {
 			let image, caption, articleLink;
@@ -98,15 +98,22 @@ $(function () { //run after jQuery loaded
 	//add snap to first article feature..
 	$("#category-selector").change(function (e) {
 		$(".article-grid").empty();
+		$(".error-wrapper").removeClass('show');
+		$(".loading-wrapper").addClass('show');
 		$("header").addClass("shrink");
 		let selectedVal = $("#category-selector").find(':selected').text(); //
-		$.getJSON(`https://api.nytimes.com/svc/topstories/v2/${selectedVal}.json?api-key=${API_KEY}`,
-			function ({ results }) {
-				console.log(results);
+		$.getJSON(`https://api.nytimes.com/svc/topstories/v2/${selectedVal}.json?api-key=${API_KEY}`)
+			.done(function ({ results }) {
+				console.log('success');
+				$(".loading-wrapper").removeClass('show');
 				cachedResults = results;
-
 				renderGrid();
-			});
+			}).fail(function (error) {
+				console.log(error.responseText);
+				$(".loading-wrapper").removeClass('show');
+				$(".error-wrapper p").text(error.responseText);
+				$(".error-wrapper").addClass('show');
+			})
 	});
 
 	$(window).resize(function () {
