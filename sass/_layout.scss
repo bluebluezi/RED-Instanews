@@ -4,7 +4,7 @@
 
 body{
 	background-color: $background-color;
-	font-family: $font-family-sansserif;
+	font-family: $font-family;
 	font-size: $font-size-base;
 	@include full-width();
 }
@@ -71,6 +71,7 @@ header{
 			grid-column:2/3;
 		}
 	}
+}
 
 .loading-wrapper, .error-wrapper{
 	@include full-width();
@@ -135,5 +136,4 @@ footer{
 	@include full-width();
 	@include centered-contents();
 	height:10vh;
-
 }
