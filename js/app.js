@@ -7,7 +7,7 @@ $(function () {
 	// let vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0); 
 	let cachedResults = null;
 	const data = [    //select2 plug-in takes array as option data
-		// { id: 0, text: "badCateTest" }, <-for debugging loader animation
+		// { id: 0, text: "badCateTest" }, <-for debugging/tweakingg loader animation
 		{ id: 1, text: "arts" },
 		{ id: 2, text: "automobiles" },
 		{ id: 3, text: "books" },
