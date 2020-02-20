@@ -1,13 +1,13 @@
 
-$(function () { //run after jQuery loaded
+$(function () {
 
 
 	const API_KEY = 'f2IdtWRfwa37ubY3f2wGJ5MDReLY3klv';
-	let vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-	let vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+	let vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0); //gets the device viewport width
+	// let vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0); 
 	let cachedResults = null;
-	const data = [    //select2 takes array as option data
-		{ id: 0, text: "badCateTest" },
+	const data = [    //select2 plug-in takes array as option data
+		// { id: 0, text: "badCateTest" }, <-for debugging loader animation
 		{ id: 1, text: "arts" },
 		{ id: 2, text: "automobiles" },
 		{ id: 3, text: "books" },
@@ -30,19 +30,18 @@ $(function () { //run after jQuery loaded
 		{ id: 20, text: "sports" },
 		{ id: 21, text: "sundayreview" },
 		{ id: 22, text: "technology" },
-		{ id: 23, text: "theatre" },
-		{ id: 24, text: "theater" },
-		{ id: 25, text: "t-magazine" },
-		{ id: 26, text: "travel" },
-		{ id: 27, text: "upshot" },
-		{ id: 28, text: "U.S." },
-		{ id: 29, text: "world" },]
+		{ id: 23, text: "theater" },
+		{ id: 24, text: "t-magazine" },
+		{ id: 25, text: "travel" },
+		{ id: 26, text: "upshot" },
+		{ id: 27, text: "U.S." },
+		{ id: 28, text: "world" }]
 
 
 
 
-	function calculateRowCount() {
-		if (vw < 768) { //typical breakpoints
+	function calculateCol() { //determine # of columns depending on device viewport width
+		if (vw < 768) { //typical breakpoints according to https://www.w3schools.com/howto/howto_css_media_query_breakpoints.asp
 			return 1;
 		} else if (vw < 992) {
 			return 3
@@ -52,9 +51,12 @@ $(function () { //run after jQuery loaded
 	}
 
 	function renderGrid() {
-		console.log('rerendering');
-		const rowCount = calculateRowCount();
+		const colCount = calculateCol();
 		$.each(cachedResults, function (key, val) {
+			if (key > 11) {
+				return false;
+			}
+
 			let image, caption, articleLink;
 			image = val.multimedia[0].url;
 
@@ -63,13 +65,13 @@ $(function () { //run after jQuery loaded
 
 				let width = val.multimedia[0].width;
 				let height = val.multimedia[0].height;
-				if (1.5 * width > height) {
-					//when the aspect ratio of image is wider than the grid cell (1:1.5)
-					height = vw / rowCount * 1.5;
+				if (width * 1.5 > height) {
+					//when the image is wider than it is tall, which has an aspect ratio of 1:1.5
+					height = vw / colCount * 1.5;
 					width = 'auto';
 				} else {
 					//when the aspect ratio of image is narrower than the grid cell
-					width = vw / rowCount;
+					width = vw / colCount;
 					height = 'auto';
 				}
 
@@ -87,7 +89,7 @@ $(function () { //run after jQuery loaded
 			}
 		});
 	}
-	$("#category-selector").select2({
+	$("#category-selector").select2({ //select2 plugin settings
 		width: '100%',
 		theme: 'classic',
 		placeholder: "Sections...",
@@ -95,7 +97,8 @@ $(function () { //run after jQuery loaded
 		closeOnSelect: true
 	});
 
-	//add snap to first article feature..
+	//(future proposal add snap to first article feature..
+	//add gradient/shadows to soften the edges of each grid cell
 	$("#category-selector").change(function (e) {
 		$(".article-grid").empty();
 		$(".error-wrapper").removeClass('show');

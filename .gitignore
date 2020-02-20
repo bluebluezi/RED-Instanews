@@ -10,3 +10,11 @@ ehthumbs.db
 # Ignore npm packages
 node_modules/
 assets/
+sass/_old.scss
+sass/app.backup.js
+instanews-desktop-initial.png
+instanews-desktop-photos.png
+instanews-mobile-initial.png
+instanews-mobile-photos.png
+instanews-tablet-initial.png
+instanews-tablet-initial.png

@@ -48,3 +48,48 @@ table {
 }
 
 
+///////////////////////////////////////////divider of section, plz ignore me//////////////////////////////////////////////////////
+
+
+$tablet-min-width : 768px;
+$desktop-min-width:992px; 
+
+$mobile-column-count:1;
+$tablet-column-count: 3;
+$desktop-column-count:4;
+
+
+$font-family-serif: 'Times New Roman', serif;
+$font-family-sansserif: 'Open Sans', 'Helvetica', 'Arial', sans-serif;
+$font-size-base: 16px;
+$text-color-primary: white;
+$text-color-secondary: #c2c2c2;
+
+$background-color: black;
+$transition-duration: 1s;
+
+@mixin centered-contents {
+	display:flex;
+	flex-direction: column;
+	justify-content:center;
+	align-items:center;
+}
+
+@mixin full-width{
+	width:100%;
+}
+
+
+@mixin tablet{
+	@media(min-width: $tablet-min-width){
+		@content; // <--this line is required
+	}
+}
+
+@mixin desktop{
+	@media(min-width: $desktop-min-width){
+		@content; // <--this line is required
+	}
+}
+
+

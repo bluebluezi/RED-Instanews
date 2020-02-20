@@ -1,43 +1,4 @@
-$tablet-min-width : 768px;
-$desktop-min-width:992px; 
 
-$mobile-column-count:1;
-$tablet-column-count: 3;
-$desktop-column-count:4;
-
-
-$font-family-serif: 'Times New Roman', serif;
-$font-family-sansserif: 'Open Sans', 'Helvetica', 'Arial', sans-serif;
-$font-size-base: 16px;
-$text-color-primary: white;
-$text-color-secondary: #c2c2c2;
-
-$background-color: black;
-$transition-duration: 1s;
-
-@mixin centered-contents {
-	display:flex;
-	flex-direction: column;
-	justify-content:center;
-	align-items:center;
-}
-
-@mixin full-width{
-	width:100%;
-}
-
-
-@mixin tablet{
-	@media(min-width: $tablet-min-width){
-		@content; // <--this line is required
-	}
-}
-
-@mixin desktop{
-	@media(min-width: $desktop-min-width){
-		@content; // <--this line is required
-	}
-}
 
 
 
@@ -110,23 +71,7 @@ header{
 			grid-column:2/3;
 		}
 	}
-// }
-// .error-wrapper{
-// 	@include full-width();
-// 	@include centered-contents();
-// 	height:0vh;
-// 	overflow: hidden;
-// 	p{
-// 		color:$text-color-primary;
-// 	}
-	
-// 	&.show{
-// 		height:50vh;
-// 		@include tablet(){
-// 			height:65vh;
-// 		}
-// 	}
-// }
+
 .loading-wrapper, .error-wrapper{
 	@include full-width();
 	@include centered-contents();
@@ -154,7 +99,7 @@ header{
 .article-grid{
 	@include full-width();
 	display:grid;
-	grid-template-columns:repeat($mobile-column-count,1fr); //make variable out of this
+	grid-template-columns:repeat($mobile-column-count,1fr);
 
 	.grid-links{
 		height: 100vw / $mobile-column-count * 1.5;
